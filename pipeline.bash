@@ -26,13 +26,6 @@ macs3_bdgcmp=$project_dir/analysis/MACS3_bdgcmp
 macs3_bdgdiff=$project_dir/analysis/MACS3_bdgdiff
 homer_out=$project_dir/analysis/homer
 ##################################################################################################################################################################################################
-# making three pseudoreplicates from each biological sample
-for file in $fastq_in/*.fastq.gz
-do
-	sample_name=`basename $file .fastq.gz`
-	fastqsplitter -t $threads -i $fastq_in/$sample_name".fastq.gz" -o $fastq_in_pseudoreplicates/$sample_name"_PR1.fastq.gz" -o $fastq_in_pseudoreplicates/$sample_name"_PR2.fastq.gz" -o $fastq_in_pseudoreplicates/$sample_name"_PR3.fastq.gz"
-done
-##################################################################################################################################################################################################
 # quality assessment of all fastq files
 fastqc $fastq_in/*.fastq.gz -t $threads --outdir=$fastqc_out
 fastqc $fastq_in_pseudoreplicates/*.fastq.gz -t $threads --outdir=$fastqc_out
